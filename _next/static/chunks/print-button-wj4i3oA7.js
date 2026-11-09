@@ -1,1 +1,0 @@
-import{r as e}from"./rolldown-runtime-C60lm6uB.js";import{i as t,r as n}from"./framework-D_rUT4EX.js";var r=e(t(),1),i=n();function a(){let[e,t]=(0,r.useState)(!1);async function n(){t(!0);try{await document.fonts.ready,window.print()}finally{t(!1)}}return(0,i.jsx)(`button`,{type:`button`,onClick:n,disabled:e,children:e?`Preparing…`:`Print / Save PDF`})}export{a as default};
