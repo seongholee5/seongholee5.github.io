@@ -194,7 +194,7 @@ h1 { font-family: var(--serif); font-size: var(--text-title); font-weight: var(-
     --profile-contact-gap: 8px;
   }
   .site-layout { display: block; }
-  .profile { position: static; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-inline) var(--space-item); padding-bottom: var(--space-list); border-bottom: var(--section-rule); margin-bottom: var(--space-list); }
+  .profile { position: static; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-inline) var(--space-item); padding-bottom: var(--space-section); border-bottom: var(--section-rule); margin-bottom: var(--space-section); }
   .profile-secondary { display: none; }
   .portrait-frame { flex: 0 0 var(--portrait-width); margin: 0; }
   .profile-information { flex: 0 0 auto; min-width: var(--profile-width); max-width: 100%; text-align: center; }
