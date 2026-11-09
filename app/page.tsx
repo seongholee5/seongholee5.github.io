@@ -15,7 +15,7 @@ const recentNews = [
   },
   {
     date: "2026-07",
-    text: <>Our paper was published in the <cite><a href="https://www.jmlr.org/papers/v27/25-2717.html" target="_blank" rel="noopener noreferrer">Journal of Machine Learning Research{"\u202f"}<Arrow /></a></cite>.</>,
+    text: <>Our paper was published in <cite><a href="https://www.jmlr.org/papers/v27/25-2717.html" target="_blank" rel="noopener noreferrer">Journal of Machine Learning Research{"\u202f"}<Arrow /></a></cite>.</>,
   },
   {
     date: "2026-03",
