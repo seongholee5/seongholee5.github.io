@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve, sep } from 'node:path';
-import { legacyProfileRoutes, writeProfileRedirects } from './profile-redirects/index.mjs';
 
 const output = resolve('dist/client');
 const routes = ['profile', 'research', 'lab', 'cv'];
@@ -12,7 +11,6 @@ for (const route of routes) {
   await mkdir(dirname(target), { recursive: true });
   await copyFile(join(output, `${route}.html`), target);
 }
-await writeProfileRedirects(output);
 await writeFile(join(output, '.nojekyll'), '');
 
 async function walk(directory) {
@@ -34,7 +32,7 @@ for (const path of paths) {
   assert.ok(!/\.(md|tsx?|map|ya?ml|toml)$/i.test(path), `Source file in export: ${path}`);
 }
 
-for (const path of ['index.html', ...[...routes, ...legacyProfileRoutes].map(route => `${route}/index.html`)]) {
+for (const path of ['index.html', ...routes.map(route => `${route}/index.html`)]) {
   const html = await readFile(join(output, path), 'utf8');
   assert.match(html, /Seong-ho Lee/);
   assert.doesNotMatch(html, /site-creator-vinext-starter|ChatGPTAuthProvider/);
@@ -48,14 +46,6 @@ for (const path of ['index.html', ...[...routes, ...legacyProfileRoutes].map(rou
 for (const path of ['index.html', 'profile/index.html', 'research/index.html', 'lab/index.html']) {
   const html = await readFile(join(output, path), 'utf8');
   assert.match(html, /<a\b[^>]*href="\/profile"[^>]*>Profile<\/a>/);
-  assert.doesNotMatch(html, /href="\/(?:biography|about-me)\/?"/);
-}
-for (const route of legacyProfileRoutes) {
-  for (const path of [`${route}/index.html`, `${route}.html`]) {
-    const html = await readFile(join(output, path), 'utf8');
-    assert.match(html, /http-equiv="refresh" content="0; url=\/profile"/);
-    assert.match(html, /rel="canonical" href="\/profile"/);
-  }
 }
 const cv = await readFile(join(output, 'cv/index.html'), 'utf8');
 assert.match(cv, /Print \/ Save PDF/);
@@ -82,4 +72,4 @@ for (const section of ['employment', 'education', 'grants', 'appointment', 'awar
   assert.ok(profile.includes(`id="${section}"`), `Missing Profile section ${section}`);
 }
 assert.doesNotMatch(profile, /id="recent-news"/);
-console.log(`Verified ${routes.length + 1} pages, ${legacyProfileRoutes.length} redirects and ${files.length} public files.`);
+console.log(`Verified ${routes.length + 1} pages and ${files.length} public files.`);

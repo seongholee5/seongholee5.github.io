@@ -23,7 +23,6 @@
 |---|---|---|---|
 | Home | `/` | `app/page.tsx` | `Seong-ho Lee \| Home` |
 | Profile | `/profile` | `app/profile/page.tsx` | `Seong-ho Lee \| Profile` |
-| 이전 Profile 주소 | `/biography`, `/about-me` | `scripts/profile-redirects/index.mjs` — `/profile`로 이동 | 동일 |
 | Research | `/research` | `app/research/page.tsx` | `Seong-ho Lee \| Research` |
 | Lab | `/lab` | `app/lab/page.tsx` | `Seong-ho Lee \| Lab` |
 | CV·인쇄/PDF 저장 | `/cv` | `app/cv/page.tsx`, `app/cv/cv.css`, `app/cv/print-button.tsx` | `Seong-ho Lee \| CV` |
@@ -375,7 +374,7 @@ CV 추가 시 기존 경력 기록 9개·연구 관심사 4개·논문 8개의 �
 - 원본 코드와 문서는 **`seongholee5/seongholee5.github.io`** 하나에서 관리한다. 검토는 Cloudflare Pages에서 진행하며, 승인본은 Cloudflare Pages와 GitHub Pages에 게시한다.
 - 유지보수 문서는 **`docs/INSTRUCTION.md`**이다. 루트 **`README.md`는 빈 파일**로 유지해 저장소 메인 화면에 긴 유지보수 문서가 표시되지 않게 한다. 문서 자체는 공개 저장소에서 직접 열 수 있다.
 - 디자인·간격·정렬·CV 규칙을 바꾸면 관련 코드와 `docs/INSTRUCTION.md`를 같은 변경으로 갱신한다. 홈페이지 메뉴에는 이 문서 링크를 추가하지 않는다.
-- `app/`, `public/`, 빌드 설정, 검사 스크립트와 테스트가 편집 원본이다. `dist/client/`는 생성된 배포 결과물이다. 원본 브랜치에는 추가하지 않고, GitHub Pages 배포 시 정적 파일만 `gh-pages` 루트에 게시한다.
+- `app/`, `public/`, 빌드 설정, 검사 스크립트와 테스트가 편집 원본이다. `dist/client/`는 생성된 배포 결과물이다. 원본 브랜치에는 추가하지 않고, GitHub Pages 배포 시 현재 빌드의 정적 파일만 `gh-pages` 루트에 게시한다.
 - Cloudflare Pages 프로젝트 하나가 이 저장소를 사용한다. 공개 브랜치는 `main`이고 검토 브랜치는 `preview`이다. 빌드 명령은 `npm test && npm run typecheck && npm run build`, 출력 폴더는 `dist/client`, Node.js는 24이다.
 - 새 변경은 `main`을 기준으로 작업하고 `preview`에 올린다. 검토용 페이지에서 변경을 확인한 뒤 사용자에게 링크와 커밋을 보낸다. 같은 검토용 주소에 새 변경을 추가했다면 그 커밋에 대해 다시 승인받는다.
 - 사용자가 승인한 커밋을 `main`에 반영하면 Cloudflare가 공개 버전을 빌드한다. 승인받기 전에는 `main`에 변경을 올리지 않는다. `main`이 검토 이후에 바뀌면 변경을 합친 결과를 다시 검토한다.
@@ -389,8 +388,8 @@ CV 추가 시 기존 경력 기록 9개·연구 관심사 4개·논문 8개의 �
 - Node.js **24 권장**, 최소 22.13, React/TypeScript + Vinext 기반이다. 공개 사이트에 데이터베이스·서버 런타임·ChatGPT 로그인은 필요하지 않다.
 - 설치 `npm ci`, 개발 `npm run dev`, 정렬 검사 `npm test`, 타입 검사 `npm run typecheck`, 정적 빌드·검사 `npm run build`.
 - 홈페이지와 CV는 같은 `app/academic-data.ts`를 사용한다.
-- `next.config.ts`는 `output: "export"`, `trailingSlash: false`이다. `scripts/check-static-export.mjs`가 `/profile/`, `/research/`, `/lab/`, `/cv/`의 `index.html`을 생성한다. 이전 주소 `/biography`와 `/about-me`는 `/profile`로 이동한다. Cloudflare Pages는 `_redirects`의 301을, GitHub Pages는 정적 HTML 이동을 사용한다. 새 주소 직접 접속과 새로고침, 이전 주소에서의 이동을 확인한다.
-- `.nojekyll`을 생성해 `_next/` 자산이 포함되게 한다. 빌드 검사에서 다섯 페이지·이전 주소 두 곳의 이동·로컬 자산·CV 제외 항목·새 창 링크·편집 원본 및 소스맵 제외를 확인한다. 유지보수 문서는 홈페이지 빌드 결과에 포함하지 않는다.
+- `next.config.ts`는 `output: "export"`, `trailingSlash: false`이다. `scripts/check-static-export.mjs`가 `/profile/`, `/research/`, `/lab/`, `/cv/`의 `index.html`을 생성한다. 각 페이지 직접 접속과 새로고침을 확인한다.
+- `.nojekyll`을 생성해 `_next/` 자산이 포함되게 한다. 빌드 검사에서 다섯 페이지·로컬 자산·CV 제외 항목·새 창 링크·편집 원본 및 소스맵 제외를 확인한다. 유지보수 문서는 홈페이지 빌드 결과에 포함하지 않는다.
 - 두 공개 사이트와 검토용 사이트는 각 도메인의 루트에 배포한다. 프로젝트 하위 경로로 바꾸면 `/`로 시작하는 링크·이미지·CSS·JS 경로를 조정하고 재검증한다.
 - 토큰·인증정보·환경 비밀값은 문서나 Git에 저장하지 않는다. `node_modules/`, `dist/`, `.env*`, 임시 미리보기 설정은 원본 버전 관리에서 제외한다.
 - 기존 Sites 소스와 공개 범위는 별도로 유지한다.
