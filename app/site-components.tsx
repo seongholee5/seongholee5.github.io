@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export function Arrow({ direction = "up-right" }: { direction?: "up-right" | "up" } = {}) { return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={direction === "up" ? "M12 20V4m-7 7 7-7 7 7" : "M6 18 18 6M6 6h12v12"} /></svg>; }
 const navigation = [
   { id: "home", label: "Home", href: "/" },
-  { id: "biography", label: "Profile", href: "/biography" },
+  { id: "profile", label: "Profile", href: "/profile" },
   { id: "research", label: "Research", href: "/research" },
   { id: "lab", label: "Lab", href: "/lab" },
 ] as const;

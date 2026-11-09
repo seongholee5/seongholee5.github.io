@@ -130,8 +130,8 @@ h1 { font-family: var(--serif); font-size: var(--text-title); font-weight: var(-
 .news-list cite { font-style: normal; }
 .intro a svg, .news-list cite a svg { display: inline-block; vertical-align: middle; }
 
-/* Biography. */
-.page-biography .content-section:first-of-type { border-top: 0; padding-top: 0; }
+/* Profile. */
+.page-profile .content-section:first-of-type { border-top: 0; padding-top: 0; }
 
 /* Research. */
 .research-heading { padding-bottom: var(--space-item); }

@@ -22,8 +22,8 @@
 | 영역 | 경로 | 수정 파일 | 브라우저 제목 |
 |---|---|---|---|
 | Home | `/` | `app/page.tsx` | `Seong-ho Lee \| Home` |
-| Profile | `/biography` | `app/biography/page.tsx` | `Seong-ho Lee \| Profile` |
-| Profile 별칭 | `/about-me` | `app/about-me/page.tsx` — Profile 재사용 | 동일 |
+| Profile | `/profile` | `app/profile/page.tsx` | `Seong-ho Lee \| Profile` |
+| 이전 Profile 주소 | `/biography`, `/about-me` | `scripts/profile-redirects/index.mjs` — `/profile`로 이동 | 동일 |
 | Research | `/research` | `app/research/page.tsx` | `Seong-ho Lee \| Research` |
 | Lab | `/lab` | `app/lab/page.tsx` | `Seong-ho Lee \| Lab` |
 | CV·인쇄/PDF 저장 | `/cv` | `app/cv/page.tsx`, `app/cv/cv.css`, `app/cv/print-button.tsx` | `Seong-ho Lee \| CV` |
@@ -134,7 +134,7 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 | 멤버 표 열 비율 | 50 / 30 / 20% | 50 / 30 / 20% | 43 / 35 / 22% |
 
 - 넓은 화면의 프로필과 본문 사이 간격은 **48px 고정**(`--layout-gap`)이다. 화면이 커져도 간격을 늘리지 않는다. 본문 열은 `minmax(0, 1fr)`이다.
-- `AcademicShell`은 Profile·Research·Lab 프로필에 `profile-secondary` 클래스를 부여한다. ≤900px에서는 이 프로필 전체를 `display: none`으로 숨긴다. 사진·이름·소속·링크·프로필 아래 선과 그 여백이 함께 사라지며 빈 공간을 남기지 않는다. 기존 `/about-me` 주소도 Profile과 같은 프로필 규칙을 사용한다.
+- `AcademicShell`은 Profile·Research·Lab 프로필에 `profile-secondary` 클래스를 부여한다. ≤900px에서는 이 프로필 전체를 `display: none`으로 숨긴다. 사진·이름·소속·링크·프로필 아래 선과 그 여백이 함께 사라지며 빈 공간을 남기지 않는다.
 - 메뉴바는 모든 화면에서 상단 sticky이다. 넓은 화면 프로필도 sticky이며 top은 `메뉴바 높이 + 48px`이다. ≤900px의 프로필은 일반 문서 흐름을 따라 올라간다.
 - 가장 좁은 화면(≤560px)에서는 사이트 이름과 메뉴 묶음을 각각 가로 가운데 정렬한다. 메뉴 간격은 화면 폭이 328px 이상이면 24px를 유지한다. 그보다 좁으면 화면 폭에서 304px를 뺀 값으로 줄이되 최소 8px를 유지한다. 예를 들어 320px 화면에서는 16px이다.
 - 중간 화면과 모바일(≤900px)의 Home에서는 사진+정보 묶음 전체, 정보 텍스트, 링크 묶음을 가운데 정렬한다. 560px 경계에서 프로필의 텍스트 정렬을 변경하지 않는다. 공간이 부족하면 사진과 정보 묶음 사이에서 줄바꿈하되, Google Scholar·CV·Email은 항상 한 줄로 유지한다. 정보 영역은 최소 200px에서 링크 세 개가 들어갈 폭까지 자연스럽게 넓어진다.
@@ -389,8 +389,8 @@ CV 추가 시 기존 경력 기록 9개·연구 관심사 4개·논문 8개의 �
 - Node.js **24 권장**, 최소 22.13, React/TypeScript + Vinext 기반이다. 공개 사이트에 데이터베이스·서버 런타임·ChatGPT 로그인은 필요하지 않다.
 - 설치 `npm ci`, 개발 `npm run dev`, 정렬 검사 `npm test`, 타입 검사 `npm run typecheck`, 정적 빌드·검사 `npm run build`.
 - 홈페이지와 CV는 같은 `app/academic-data.ts`를 사용한다.
-- `next.config.ts`는 `output: "export"`, `trailingSlash: false`이다. `scripts/check-static-export.mjs`가 `/about-me/`, `/biography/`, `/research/`, `/lab/`, `/cv/`의 `index.html`을 생성한다. 각 페이지 직접 접속과 새로고침을 확인한다.
-- `.nojekyll`을 생성해 `_next/` 자산이 포함되게 한다. 빌드 검사에서 다섯 경로·로컬 자산·CV 제외 항목·새 창 링크·편집 원본 및 소스맵 제외를 확인한다. 유지보수 문서는 홈페이지 빌드 결과에 포함하지 않는다.
+- `next.config.ts`는 `output: "export"`, `trailingSlash: false`이다. `scripts/check-static-export.mjs`가 `/profile/`, `/research/`, `/lab/`, `/cv/`의 `index.html`을 생성한다. 이전 주소 `/biography`와 `/about-me`는 `/profile`로 이동한다. Cloudflare Pages는 `_redirects`의 301을, GitHub Pages는 정적 HTML 이동을 사용한다. 새 주소 직접 접속과 새로고침, 이전 주소에서의 이동을 확인한다.
+- `.nojekyll`을 생성해 `_next/` 자산이 포함되게 한다. 빌드 검사에서 다섯 페이지·이전 주소 두 곳의 이동·로컬 자산·CV 제외 항목·새 창 링크·편집 원본 및 소스맵 제외를 확인한다. 유지보수 문서는 홈페이지 빌드 결과에 포함하지 않는다.
 - 두 공개 사이트와 검토용 사이트는 각 도메인의 루트에 배포한다. 프로젝트 하위 경로로 바꾸면 `/`로 시작하는 링크·이미지·CSS·JS 경로를 조정하고 재검증한다.
 - 토큰·인증정보·환경 비밀값은 문서나 Git에 저장하지 않는다. `node_modules/`, `dist/`, `.env*`, 임시 미리보기 설정은 원본 버전 관리에서 제외한다.
 - 기존 Sites 소스와 공개 범위는 별도로 유지한다.

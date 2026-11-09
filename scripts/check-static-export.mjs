@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
+import { legacyProfileRoutes, writeProfileRedirects } from './profile-redirects/index.mjs';
 
 const output = resolve('dist/client');
-const routes = ['about-me', 'biography', 'research', 'lab', 'cv'];
+const routes = ['profile', 'research', 'lab', 'cv'];
 // Vinext's trailingSlash export currently skips redirecting routes. Export
 // without redirects, then provide directory indexes for GitHub Pages URLs.
 for (const route of routes) {
@@ -11,6 +12,7 @@ for (const route of routes) {
   await mkdir(dirname(target), { recursive: true });
   await copyFile(join(output, `${route}.html`), target);
 }
+await writeProfileRedirects(output);
 await writeFile(join(output, '.nojekyll'), '');
 
 async function walk(directory) {
@@ -26,13 +28,13 @@ async function walk(directory) {
 }
 
 const files = await walk(output);
-const paths = new Set(files.map(path => path.slice(output.length + 1)));
+const paths = new Set(files.map(path => path.slice(output.length + 1).split(sep).join('/')));
 for (const path of paths) {
   assert.ok(!/(^|\/)(README[^/]*|\.git|\.env[^/]*|package[^/]*|app|scripts|tests)(\/|$)/i.test(path), `Private file in export: ${path}`);
   assert.ok(!/\.(md|tsx?|map|ya?ml|toml)$/i.test(path), `Source file in export: ${path}`);
 }
 
-for (const path of ['index.html', ...routes.map(route => `${route}/index.html`)]) {
+for (const path of ['index.html', ...[...routes, ...legacyProfileRoutes].map(route => `${route}/index.html`)]) {
   const html = await readFile(join(output, path), 'utf8');
   assert.match(html, /Seong-ho Lee/);
   assert.doesNotMatch(html, /site-creator-vinext-starter|ChatGPTAuthProvider/);
@@ -41,6 +43,18 @@ for (const path of ['index.html', ...routes.map(route => `${route}/index.html`)]
     if (!url.startsWith('/') || url.startsWith('//')) continue;
     const target = url.replace(/^\//, '').replace(/\/$/, '');
     assert.ok(paths.has(target) || paths.has(`${target}/index.html`) || (!target && paths.has('index.html')), `Missing asset or route ${url} in ${path}`);
+  }
+}
+for (const path of ['index.html', 'profile/index.html', 'research/index.html', 'lab/index.html']) {
+  const html = await readFile(join(output, path), 'utf8');
+  assert.match(html, /<a\b[^>]*href="\/profile"[^>]*>Profile<\/a>/);
+  assert.doesNotMatch(html, /href="\/(?:biography|about-me)\/?"/);
+}
+for (const route of legacyProfileRoutes) {
+  for (const path of [`${route}/index.html`, `${route}.html`]) {
+    const html = await readFile(join(output, path), 'utf8');
+    assert.match(html, /http-equiv="refresh" content="0; url=\/profile"/);
+    assert.match(html, /rel="canonical" href="\/profile"/);
   }
 }
 const cv = await readFile(join(output, 'cv/index.html'), 'utf8');
@@ -60,9 +74,12 @@ for (const [link] of news.matchAll(/<a\b[^>]*>/g)) {
   assert.match(link, /\btarget="_blank"/, 'Recent News links must open in a new tab');
 }
 assert.doesNotMatch(home, /id="employment"/);
-const biography = await readFile(join(output, 'biography/index.html'), 'utf8');
+const profile = await readFile(join(output, 'profile/index.html'), 'utf8');
+assert.match(profile, /<title>Seong-ho Lee \| Profile<\/title>/);
+assert.match(profile, /href="\/profile"[^>]*aria-current="page"/);
+assert.match(profile, /page-content page-profile/);
 for (const section of ['employment', 'education', 'grants', 'appointment', 'awards']) {
-  assert.ok(biography.includes(`id="${section}"`), `Missing Biography section ${section}`);
+  assert.ok(profile.includes(`id="${section}"`), `Missing Profile section ${section}`);
 }
-assert.doesNotMatch(biography, /id="recent-news"/);
-console.log(`Verified ${routes.length + 1} pages and ${files.length} public files; README, source files and source maps excluded.`);
+assert.doesNotMatch(profile, /id="recent-news"/);
+console.log(`Verified ${routes.length + 1} pages, ${legacyProfileRoutes.length} redirects and ${files.length} public files.`);
