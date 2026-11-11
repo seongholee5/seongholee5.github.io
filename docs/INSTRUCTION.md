@@ -329,7 +329,7 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 1. 최신 소스를 연 뒤 이 문서와 실제 변경 대상 파일을 확인한다. 기존 미완료 변경을 덮어쓰지 않는다.
 2. 내용 수정은 해당 데이터·페이지 파일에서, 디자인 수정은 공통 CSS 변수·컴포넌트에서 처리한다. 별도 지시 없는 페이지까지 시각 양식을 바꾸지 않는다.
 3. 변경 범위에 맞춰 아래 검증을 수행한다. 통과한 검증은 새로운 변경이나 문제가 없으면 반복하지 않는다.
-4. 앱을 바꾼 경우 `main`에 커밋하고 Cloudflare 검토 주소와 커밋 SHA를 사용자에게 전달한다. 접근 인증이 필요한 화면은 소유자가 확인한다. 승인된 커밋의 정적 결과물을 `gh-pages`에 배포하고 GitHub Pages를 확인한다.
+4. 앱을 바꾼 경우 `main`에 커밋하고 Cloudflare 검토 주소와 커밋 SHA를 사용자에게 전달한다. 접근 인증이 필요한 화면은 소유자가 확인한다. 승인된 커밋의 정적 결과물을 `github`에 배포하고 GitHub Pages를 확인한다.
 5. 승인된 기준이 바뀌었으면 INSTRUCTION도 같은 변경에 포함한다. INSTRUCTION만 수정한 경우 문서와 소스 기록을 저장하며 화면을 바꾸거나 다시 디자인하지 않는다.
 
 | 변경 범위 | 검증 |
@@ -374,12 +374,12 @@ CV 추가 시 기존 경력 기록 9개·연구 관심사 4개·논문 8개의 �
 - 원본 코드와 문서는 **`seongholee5/seongholee5.github.io`** 하나에서 관리한다. 검토는 Cloudflare Pages에서 진행하고 승인본은 GitHub Pages에 공개한다.
 - 유지보수 문서는 **`docs/INSTRUCTION.md`**이다. 루트 **`README.md`는 빈 파일**로 유지해 저장소 메인 화면에 긴 유지보수 문서가 표시되지 않게 한다. 문서 자체는 공개 저장소에서 직접 열 수 있다.
 - 디자인·간격·정렬·CV 규칙을 바꾸면 관련 코드와 `docs/INSTRUCTION.md`를 같은 변경으로 갱신한다. 홈페이지 메뉴에는 이 문서 링크를 추가하지 않는다.
-- `app/`, `public/`, 빌드 설정, 검사 스크립트와 테스트가 편집 원본이다. `dist/client/`는 생성된 배포 결과물이다. 원본 브랜치에는 추가하지 않고, GitHub Pages 배포 시 현재 빌드의 정적 파일만 `gh-pages` 루트에 게시한다.
-- Cloudflare Pages는 `main`만 자동 배포한다. Preview branch는 `None`으로 설정해 `preview`와 `gh-pages`의 자동 빌드를 끈다. 빌드 명령은 `npm test && npm run typecheck && npm run build`, 출력 폴더는 `dist/client`, Node.js는 24이다.
+- `app/`, `public/`, 빌드 설정, 검사 스크립트와 테스트가 편집 원본이다. `dist/client/`는 생성된 배포 결과물이다. 원본 브랜치에는 추가하지 않고, GitHub Pages 배포 시 현재 빌드의 정적 파일만 `github` 루트에 게시한다.
+- Cloudflare Pages는 `main`만 자동 배포한다. Preview branch는 `None`으로 설정해 `preview`와 `github`의 자동 빌드를 끈다. 빌드 명령은 `npm test && npm run typecheck && npm run build`, 출력 폴더는 `dist/client`, Node.js는 24이다.
 - 새 변경은 `main`에 올려 Cloudflare에서 검토한다. 검토 후 `main`이 바뀌어도 공개 빌드는 승인된 SHA에서 만든다. 이후 변경을 공개하려면 해당 커밋을 다시 승인받는다.
 - Cloudflare Access는 기본 `pages.dev` 호스트와 기존 Preview 주소를 보호한다. 소유자 이메일만 허용하며 공개 문서에는 이메일을 기록하지 않는다. 기존 Preview 배포 기록은 보관한다. GitHub 저장소에는 공개 가능한 자료만 올린다.
-- GitHub Pages는 `Deploy from a branch`의 `gh-pages` / `(root)`에서 정적 파일을 제공한다. `seongholee5.github.io`는 주소를 유지하며, Cloudflare 검토 주소와 독립적으로 배포된다. 저장소에 별도 Actions 워크플로 파일을 두지 않는다.
-- 승인본 공개 시 승인된 `main` 커밋의 소스로 빌드하고 검사를 통과한 `dist/client/`의 내용과 `.nojekyll`을 `gh-pages`에 올린다. GitHub가 기본 `pages build and deployment` 실행을 생성한다. `github-pages` 환경의 `Required reviewers`는 꺼져 있다. 사용자에게 공개 지시를 받은 뒤에만 `gh-pages`를 갱신하며, 갱신 후 GitHub가 별도 승인 단계 없이 게시한다. 배포 완료 후 `github.io`에서 Home, Profile, Research, Lab, CV를 확인한다. 문서만 수정했으면 공개 정적 파일을 다시 게시할 필요는 없다.
+- GitHub Pages는 `Deploy from a branch`의 `github` / `(root)`에서 정적 파일을 제공한다. `seongholee5.github.io`는 주소를 유지하며, Cloudflare 검토 주소와 독립적으로 배포된다. 저장소에 별도 Actions 워크플로 파일을 두지 않는다.
+- 승인본 공개 시 승인된 `main` 커밋의 소스로 빌드하고 검사를 통과한 `dist/client/`의 내용과 `.nojekyll`을 `github`에 올린다. GitHub가 기본 `pages build and deployment` 실행을 생성한다. `github-pages` 환경의 `Required reviewers`는 꺼져 있다. 사용자에게 공개 지시를 받은 뒤에만 `github`를 갱신하며, 갱신 후 GitHub가 별도 승인 단계 없이 게시한다. 배포 완료 후 `github.io`에서 Home, Profile, Research, Lab, CV를 확인한다. 문서만 수정했으면 공개 정적 파일을 다시 게시할 필요는 없다.
 - 다른 저장소로 복사하거나 별도의 배포용 토큰을 관리하지 않는다.
 
 ### 실행과 검증
