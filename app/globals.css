@@ -52,7 +52,6 @@
   --line-title: 36px;
   --line-section: 32px;
   --line-body: 24px;
-  --line-intro: 28px;
   --line-meta: 20px;
   --space-detail: 4px;
   --space-small: 8px;
@@ -112,7 +111,7 @@ h1 { font-family: var(--serif); font-size: var(--text-title); font-weight: var(-
 /* Major sections and list items use distinct, consistent divider roles. */
 .page-content { min-width: 0; }
 .page-heading { padding-bottom: var(--space-section); }
-.intro { font-size: var(--text-item); line-height: var(--line-intro); color: var(--body-text); }
+.intro { font-size: var(--text-item); line-height: var(--line-body); color: var(--body-text); }
 .intro a, .news-list :is(a, strong) { color: var(--navy); font-weight: 600; }
 .content-section, .lab-section, .publications-section { border-top: var(--section-rule); padding-top: var(--space-section); }
 .content-section, .lab-section { padding-bottom: var(--space-section); }
