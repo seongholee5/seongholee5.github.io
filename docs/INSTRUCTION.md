@@ -82,7 +82,8 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 | 프로필 이름 | **24 / 32px** | Garamond 600 | 남색 |
 | 워드마크·섹션 제목 | 24 / 32px | Garamond 600 | 남색 |
 | 상단 메뉴 | **16 / 24px** | Arial 400, 활성 600 | 회색, 활성 파랑 |
-| 프로필 직함·경력·학위·과제·논문·연구 관심사 항목 제목 | 16 / 24px | Arial 600 | 남색 |
+| 프로필 직함·경력·학위·과제·연구 관심사 항목 제목 | 16 / 24px | Arial 600 | 남색 |
+| Research 논문 제목 | 14 / 24px | Arial 600 | 남색 |
 | Welcome 소개 문단 | 16 / 28px | Arial 400 | 본문색 |
 | Research 저널명 | 16 / 24px | Garamond 600 **italic** | 본문색 |
 | Recent News 저널명 | 14 / 24px | Arial 600 일반체 | 남색 |

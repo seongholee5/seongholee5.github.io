@@ -147,7 +147,7 @@ h1 { font-family: var(--serif); font-size: var(--text-title); font-weight: var(-
 .publication + .publication { border-top: var(--item-rule); padding-top: var(--space-list); }
 .publication:last-child { padding-bottom: 0; }
 
-.publication h3 { margin-bottom: var(--space-detail); }
+.publication h3 { font-size: var(--text-body); margin-bottom: var(--space-detail); }
 .publication h3 a { display: block; position: relative; padding-right: var(--space-item); color: inherit; }
 .publication h3 svg { position: absolute; right: 0; top: 6px; opacity: .7; }
 .intro a:hover, .publication h3 a:hover, .news-list a:hover { color: var(--blue); text-decoration-line: underline; }
