@@ -221,8 +221,8 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 - 최신 연도부터 배열에 작성한다. 현재 `2026+`는 투고 중인 논문 표기이며, 같은 연도 안의 순서는 별도 지시 없이 변경하지 않는다.
 - 제목 링크, 저자 순서, DOI/arXiv/JMLR 주소, 저널명을 정확히 보존한다.
 - 저자 기호: `*` corresponding author, `⁺` lab member, `⁼` co-first author. 현재 저자 문자열에 들어 있는 기호를 그대로 사용한다. 별도 `<sup>` 스타일로 변경하지 않았다.
-- 범례는 `* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author`이며 하나의 문단으로 자연스럽게 줄바꿈한다. Publications 제목 아래 12px에 둔다. 범례의 화살표 제거·묶음 단위 줄바꿈은 적용하지 않았다.
-- 일반 섹션 제목 아래 간격은 24px이나 Publications는 범례가 있어 제목→범례 12px, 범례→목록 24px이다.
+- 범례는 `* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author`이며 하나의 문단으로 자연스럽게 줄바꿈한다. Publications와 Preprints 각 제목 아래 12px에 둔다. 범례의 화살표 제거·묶음 단위 줄바꿈은 적용하지 않았다.
+- 일반 섹션 제목 아래 간격은 24px이나 Publications와 Preprints는 범례가 있어 제목→범례 12px, 범례→목록 24px이다.
 - 관심사와 논문 내용은 `app/academic-data.ts`의 `interests`, `publications` 배열에서 수정한다. Research와 CV가 같은 배열을 읽는다. 홈페이지의 `submitted`만 `.publication-status`이며 실제 저널명은 `.journal`이다.
 
 ### CV — 홈페이지 데이터 연동

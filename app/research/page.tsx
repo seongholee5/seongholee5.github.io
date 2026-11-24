@@ -22,6 +22,7 @@ function PaperList({ papers }: { papers: typeof publications }) {
 }
 
 export default function ResearchPage() {
+  const authorKey = <p className="author-key">* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author</p>;
   const published = publications.filter(p => p.journal !== "submitted");
   const preprints = publications.filter(p => p.journal === "submitted");
 
@@ -35,12 +36,13 @@ export default function ResearchPage() {
       </div>
       <section className="publications-section" aria-labelledby="publications-title">
         <div className="section-heading"><h2 id="publications-title">Publications</h2></div>
-        <p className="author-key">* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author</p>
+        {authorKey}
         <PaperList papers={published} />
       </section>
       {preprints.length > 0 && (
         <section className="publications-section" aria-labelledby="preprints-title">
           <div className="section-heading"><h2 id="preprints-title">Preprints</h2></div>
+          {authorKey}
           <PaperList papers={preprints} />
         </section>
       )}
