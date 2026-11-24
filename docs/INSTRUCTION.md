@@ -187,6 +187,8 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 
 ### Home
 
+- Home은 내용이 짧아도 브라우저의 세로 스크롤바 자리를 확보한다. 스크롤바를 겹쳐 표시하는 환경에서는 운영체제의 표시 방식을 따른다.
+
 순서: **Welcome! → Recent News**.
 
 - Welcome!과 Recent News는 24px 제목을 사용한다. 소개 문단은 16px/28px이다. 지도교수 이름 링크는 같은 크기의 Arial 600 남색이며 공통 15px 바깥쪽 화살표를 표시한다.

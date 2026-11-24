@@ -65,6 +65,9 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + var(--space-item)); }
+@media screen {
+  html:has(.page-home) { overflow-y: scroll; }
+}
 body { margin: 0; background: var(--paper); color: var(--body-text); font-family: var(--sans); font-size: var(--text-body); font-weight: 400; line-height: var(--line-body); letter-spacing: 0; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, p { margin: 0; }
 a { color: var(--blue); text-decoration: none; -webkit-tap-highlight-color: transparent; }
