@@ -6,6 +6,7 @@ import "./cv.css";
 export const metadata: Metadata = { title: "Seong-ho Lee | CV" };
 
 export default function CVPage() {
+  const published = publications.filter(p => p.journal !== "submitted");
   return <div className="cv-page">
     <a className="skip-link" href="#cv-main">Skip to curriculum vitae</a>
     <div className="cv-toolbar" aria-label="CV actions">
@@ -42,12 +43,12 @@ export default function CVPage() {
         <h2 id="cv-publications">Publications</h2>
         <p className="cv-author-key">* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author</p>
         <ol className="cv-publications">
-          {publications.map(publication => <li className="cv-entry cv-publication" key={publication.title}>
+          {published.map(publication => <li className="cv-entry cv-publication" key={publication.title}>
             <p className="cv-date">{publication.year}</p>
             <div className="cv-entry-body">
               <h3><a href={publication.url} target="_blank" rel="noopener noreferrer">{publication.title}</a></h3>
               <p>{publication.authors}</p>
-              <p className={publication.journal === "submitted" ? "cv-secondary" : "cv-journal"}>{publication.journal}</p>
+              <p className="cv-journal">{publication.journal}</p>
             </div>
           </li>)}
         </ol>

@@ -230,7 +230,7 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 - `/cv`는 독립된 CV 문서 화면이다. 프로필의 **Google Scholar와 Email 사이에 있는 CV 링크**로 새 탭에서 연다. 홈페이지 디자인·메뉴 구조는 유지한다.
 - 이름·직함·소속은 `app/academic-data.ts`의 `profile`에서 읽는다. 프로필과 CV에 같은 정보를 중복 작성하지 않는다.
 - CV 문서 맨 위는 이름 → 직함 → 소속으로 시작한다. `Curriculum vitae` 표제와 홈페이지 주소·Google Scholar 링크는 화면과 인쇄 모두 표시하지 않는다. 상단 도구 영역에는 오른쪽 정렬된 `Print / Save PDF` 버튼만 두며, 돌아가기 링크와 출력 안내 문구는 표시하지 않는다.
-- 포함 순서: Employment → Education → Grants → Appointment → Awards → Research interests → Publications. CV는 공통 데이터를 원본 배열 순서로 표시하며, 프리프린트도 Publications에 포함한다.
+- 포함 순서: Employment → Education → Grants → Appointment → Awards → Research interests → Publications. 화면·인쇄용 CV의 Publications에는 게재 논문만 원본 배열 순서로 표시한다. 프리프린트는 Research의 Preprints에서 확인한다.
 - **Welcome 제목과 소개문 전체, Lab 페이지 내용은 제외**한다. 사진·메뉴·sticky 프로필을 CV 본문에 넣지 않는다. 기존 이메일 주소 숨김 원칙을 유지하며 CV에도 평문 이메일을 노출하지 않는다.
 - `Print / Save PDF` 버튼은 글꼴 준비를 기다린 뒤 브라우저 인쇄 창을 연다. 준비 중에는 `Preparing…`으로 표시하고 중복 클릭을 막는다. 사용자가 프린터 또는 PDF 저장을 선택한다. 고정 PDF 파일을 별도로 관리하거나 클릭 즉시 다운로드한다고 표시하지 않는다.
 - CV 글자 크기는 **짝수 정수**만 사용한다. 화면의 글자 크기·줄높이는 홈페이지의 공통 역할 변수(`--text-*`, `--line-*`)를 참조한다. `.cv-page`의 `--cv-*` 변수에서 연결하고 인쇄 매체에서 더 작은 CV 전용 값으로 덮어쓴다. 여백은 아래 CV 규칙을 유지하며 별도의 개별 숫자 예외를 만들지 않는다.
