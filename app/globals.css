@@ -143,7 +143,8 @@ h1 { font-family: var(--serif); font-size: var(--text-title); font-weight: var(-
 .interest { padding-bottom: var(--space-list); }
 .interest:nth-child(n+3) { border-top: var(--item-rule); padding-top: var(--space-list); }
 .interest h2 { margin-bottom: var(--space-detail); }
-.publications-section .section-heading > h2 { margin-bottom: var(--space-label); }
+.publications-section + .publications-section { margin-top: var(--space-section); }
+.publications-section:has(.author-key) .section-heading > h2 { margin-bottom: var(--space-label); }
 .author-key { margin-bottom: var(--space-item); }
 .publication-list { list-style: none; margin: 0; padding: 0; }
 .publication { display: grid; align-items: baseline; grid-template-columns: var(--year-width) minmax(0,1fr); gap: var(--space-inline); padding-bottom: var(--space-list); }
