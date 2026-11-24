@@ -11,7 +11,7 @@ function PaperList({ papers }: { papers: typeof publications }) {
         <li className="publication" key={p.title}>
           <span className="publication-year">{p.year}</span>
           <article>
-            <h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}<Arrow /></a></h3>
+            <h3>{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer">{p.title}<Arrow /></a> : p.title}</h3>
             <p className="authors">{p.authors}</p>
             <p className={p.journal === "submitted" ? "publication-status" : "journal"}>{p.journal}</p>
           </article>

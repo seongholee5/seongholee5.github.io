@@ -104,6 +104,7 @@ export const interests = [
   ["Optimal sampling", "for designing sampling strategies that minimize loss or maximize efficiency under resource constraints"],
 ];
 export const publications = [
+  { year: "2026+", title: "Optimal two-phase sampling design for out-of-sample prediction in linear regression", authors: "Sangjoon An⁺⁼, Geonho Byeon⁺⁼, Seong-ho Lee*", journal: "submitted" },
   { year: "2026+", title: "Surrogate-assisted optimal sampling for risk prediction under measurement constraints", authors: "Sunhyun Park⁺, Seong-ho Lee*", journal: "submitted", url: "https://arxiv.org/abs/2606.03477" },
   { year: "2026", title: "DOD: Detection of outliers in high dimensional data with distance of distances", authors: "Seong-ho Lee, Yongho Jeon*", journal: "Statistics and Computing", url: "https://doi.org/10.1007/s11222-026-11026-0" },
   { year: "2026", title: "Efficient inference under label shift in unsupervised domain adaptation", authors: "Seong-ho Lee, Yanyuan Ma, Jiwei Zhao*", journal: "Journal of Machine Learning Research", url: "https://www.jmlr.org/papers/v27/25-2717.html" },

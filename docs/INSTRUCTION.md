@@ -219,7 +219,7 @@ Home·Profile·Research·Lab은 모든 화면에서 동일한 크기를 사용�
 - 논문 목록은 연도 열 48px + 간격 16px + 내용 열이다. 모바일에서도 연도 열을 유지한다.
 - 논문 내부는 **제목 → 저자 → 저널명/상태**, 각 줄 사이 margin 4px, 줄높이 24px이다.
 - 최신 연도부터 배열에 작성한다. 현재 `2026+`는 투고 중인 논문 표기이며, 같은 연도 안의 순서는 별도 지시 없이 변경하지 않는다.
-- 제목 링크, 저자 순서, DOI/arXiv/JMLR 주소, 저널명을 정확히 보존한다.
+- 제목 링크, 저자 순서, DOI/arXiv/JMLR 주소, 저널명을 정확히 보존한다. URL이 없는 프리프린트는 제목을 일반 텍스트로 표시한다.
 - 저자 기호: `*` corresponding author, `⁺` lab member, `⁼` co-first author. 현재 저자 문자열에 들어 있는 기호를 그대로 사용한다. 별도 `<sup>` 스타일로 변경하지 않았다.
 - 범례는 `* ⭢ corresponding author; ⁺ ⭢ lab member; ⁼ ⭢ co-first author`이며 하나의 문단으로 자연스럽게 줄바꿈한다. Publications와 Preprints 각 제목 아래 12px에 둔다. 범례의 화살표 제거·묶음 단위 줄바꿈은 적용하지 않았다.
 - 일반 섹션 제목 아래 간격은 24px이나 Publications와 Preprints는 범례가 있어 제목→범례 12px, 범례→목록 24px이다.
