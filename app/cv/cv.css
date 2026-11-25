@@ -41,6 +41,7 @@
 .cv-author-key { margin-bottom: var(--cv-space-heading); }
 .cv-publications { list-style: none; margin: 0; padding: 0; }
 .cv-publication { grid-template-columns: var(--year-width) minmax(0, 1fr); }
+.cv-publication h3 { font-size: var(--cv-text-body); }
 .cv-journal { font: italic 600 var(--cv-text-journal)/var(--cv-line-body) var(--serif); }
 
 @media screen and (max-width:560px) {
